@@ -1,0 +1,12 @@
+Install CloudBees Docker Build and Publish plugin in Manage Jenkins>Global Tool Configuration
+
+(Make sure you have installed docker on your machine and run
+$ sudo systemctl start docker
+$ sudo chmod 666 /var/run/docker.sock to avoid permission issue)
+-> Freestyle project
+
+In Source Code Management, Choose Git and add the repository url of the code you want to build an image of.
+In build Step, Choose Docker build and publish
+> Add the Repository name-> <dockerhub_id/tag>  //chandanarm/fruits
+>Add also the Registry credentials->Docker hub id and Password
+and Build

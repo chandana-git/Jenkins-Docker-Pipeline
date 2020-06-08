@@ -1,0 +1,96 @@
+Installing jenkins in ec2(Linux-centos7)
+-----------------------------------------
+Installing java 8
+-----------------
+sudo yum install wget
+sudo wget --no-cookies --no-check-certificate --header "Cookie: %3A%2F%2Fwww.oracle.com%2F; -securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jdk-8u151-linux-x64.tar.gz
+sudo yum install tar
+sudo tar xzf jdk-8u151-linux-x64.tar.gz
+[centos@ip-10-0-3-4 ~]$ java -version
+openjdk version "1.8.0_252"
+OpenJDK Runtime Environment (build 1.8.0_252-b09)
+OpenJDK 64-Bit Server VM (build 25.252-b09, mixed mode)
+ sudo yum -y install java-1.8.0-devel  //javac
+
+
+Setting path
+---------------
+[centos@ip-10-0-3-4 ~]$ export JAVA_HOME=/usr/java/jdk1.8.0_252/
+[centos@ip-10-0-3-4 ~]$ export JRE_HOME=/usr/java/jdk1.8.0_252/jre
+[centos@ip-10-0-3-4 ~]$ PATH=$PATH:$HOME/bin:$JAVA_HOME/bin
+[centos@ip-10-0-3-4 ~]$ export PATH
+
+Installing Jenkins
+---------------------
+sudo yum update
+sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
+sudo rpm --import http://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
+sudo yum install jenkins
+sudo service jenkins start
+
+Access using http://IP:8080/
+
+It will ask for the initial password, please run the below command
+cat /var/lib/jenkins/secrets/initialAdminPassword
+
+copy paste the password
+Setting of Path
+--------------------
+ls -la
+nano .bash_profile
+#set the directory where bin is present
+
+JAVA_HOME=/usr/lib/jvm/jre-1.8.0-openjdk-1.8.0.252.b09-2.el7_8.x86_64/
+PATH=$PATH:$JAVA_HOME:$HOME/bin
+
+##([centos@ip-10-0-3-4 first]$ find /usr/lib/jvm/java-1.8* | head -n 3
+/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.252.b09-2.el7_8.x86_64
+/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.252.b09-2.el7_8.x86_64/jre
+/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.252.b09-2.el7_8.x86_64/jre/bin
+)
+
+export PATH
+
+[centos@ip-10-0-3-4 first]$ echo $PATH
+/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/usr/lib/jvm/jre-1.8.0-openjdk-1.8.0.252.b09-2.el7_8.x86_64/:/home/centos/bin
+
+
+
+Configure Jenkins
+----------------------------------------------
+The default Username is admin
+Grab the default password
+Password Location:/var/lib/jenkins/secrets/initialAdminPassword
+Skip Plugin Installation; We can do it later
+Change admin password
+Admin > Configure > Password
+Configure java path
+Manage Jenkins > Global Tool Configuration > JDK
+Create another admin user id
+
+https://github.com/ValaxyTech/DevOpsDemos/blob/master/Jenkins/Installation.MD
+------------------------------------------------------
+Installing docker on Centos
+
+$ sudo yum install -y yum-utils
+sudo yum-config-manager \
+>     --add-repo \
+
+>     https://download.docker.com/linux/centos/docker-ce.repo
+
+ $sudo yum install docker-ce docker-ce-cli containerd.io
+
+$ docker -v
+Docker version 19.03.11, build 42e35e61f3
+ 
+Permission error?
+[centos@ip-10-0-3-4 ~]$ sudo usermod -aG docker ${USER}
+systemctl docker start
+[centos@ip-10-0-3-4 ~]$ docker ps
+sudo su
+
+[root@ip-10-0-3-4 centos]# sudo chmod 666 /var/run/docker.sock
+[root@ip-10-0-3-4 centos]# docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+------------------------------------------------------------------------
+
