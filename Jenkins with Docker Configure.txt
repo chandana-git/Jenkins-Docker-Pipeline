@@ -10,3 +10,11 @@ In build Step, Choose Docker build and publish
 > Add the Repository name-> <dockerhub_id/tag>  //chandanarm/fruits
 >Add also the Registry credentials->Docker hub id and Password
 and Build
+--------------------------------------------------------------------------------------------------
+In pipeline project
+open pipeline script
+
+select withCredentials:Bind credentials to varidables
+
+Select secret text, Add variable name and add secret text
+While adding(Choose kind as secret text and give id as docker-pwd) and generate script
